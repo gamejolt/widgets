@@ -10,6 +10,7 @@ module.exports = function( config )
 		plugins.connect.server( {
 			root: config.buildDir,
 			livereload: true,
+			port: 8081,
 			middleware: function( connect, opt )
 			{
 				return [ historyApiFallback ];
