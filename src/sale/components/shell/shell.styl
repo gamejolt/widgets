@@ -32,6 +32,13 @@ body
 	@media $media-xs
 		height: $xs-height
 
+// Keep the form hidden while loading.
+form
+	display: none
+
+	body.is-loaded &
+		display: block
+
 .header
 	@extend .clearfix
 
@@ -192,3 +199,9 @@ body
 	.right
 		overflow: hidden
 		max-width: 0
+
+.widget-error
+	display: none
+
+.has-invalid-key-error .widget-error-invalid-key
+	display: block

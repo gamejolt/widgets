@@ -41,6 +41,10 @@
 
 		<div id="shell">
 
+			<div class="widget-error widget-error-invalid-key">
+				Invalid widget URL.
+			</div>
+
 			<form method="post" target="_top" id="widget-form">
 
 				<div class="header">
@@ -125,7 +129,16 @@
 		</div>
 
 		<script src="/vendor.js"></script>
-		<script src="/sale/app.js"></script>
+
+		<script>
+
+			System.paths['sale/*'] = '/sale/*.js'
+			System.import( 'sale/app' ).then( function( module )
+			{
+				var app = new module.App();
+			} );
+
+		</script>
 
 	</body>
 </html>

@@ -34,6 +34,6 @@ module.exports = function( config )
 		gulp.watch( [ 'src/**/*.styl' ], [ 'styles' ] );
 		gulp.watch( [ 'src/**/*.{png,jpg,jpeg,gif,svg,ico}' ], [ 'images' ] );
 		gulp.watch( [ 'src/**/*.html' ], [ 'html' ] );
-		gulp.watch( [ 'src/**/*.js' ], [ 'js' ] );
+		gulp.watch( [ 'src/**/*.{js,ts}' ], [ 'js' ] );
 	} );
 };

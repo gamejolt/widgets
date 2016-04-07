@@ -1,22 +1,28 @@
-var _ = require( 'lodash' );
-var gulp = require( 'gulp' );
-var gutil = require( 'gulp-util' );
-var plugins = require( 'gulp-load-plugins' )();
-var streamqueue = require( 'streamqueue' );
-var fs = require( 'fs' );
+'use strict';
+
+let _ = require( 'lodash' );
+let gulp = require( 'gulp' );
+let gutil = require( 'gulp-util' );
+let plugins = require( 'gulp-load-plugins' )();
+let streamqueue = require( 'streamqueue' );
+let fs = require( 'fs' );
 
 module.exports = function( config )
 {
 	// Pull their bower file.
-	var bower = require( '../bower.json' );
+	let bower = require( '../bower.json' );
+
+	let typescript = plugins.typescript.createProject( './src/tsconfig.json', {
+		typescript: require( 'typescript' )
+	} );
 
 	function getBowerComponentFiles( component )
 	{
-		var files = [];
-		var mainFile = null;
+		let files = [];
+		let mainFile = null;
 
 		// Try to get the bower config for this component.
-		var componentBower = require( '../src/bower-lib/' + component + '/.bower.json' );
+		let componentBower = require( '../src/bower-lib/' + component + '/.bower.json' );
 		if ( componentBower.main ) {
 			if ( _.isString( componentBower.main ) && componentBower.main.match( /\.js$/ ) ) {
 				mainFile = componentBower.main;
@@ -53,7 +59,10 @@ module.exports = function( config )
 
 	gulp.task( 'js:vendor', function()
 	{
-		var files = [];
+		let files = [
+			'node_modules/systemjs/dist/system-register-only.src.js',
+		];
+
 		if ( bower.dependencies ) {
 
 			_.forEach( bower.dependencies, function( version, component )
@@ -82,16 +91,16 @@ module.exports = function( config )
 	/**
 	 * Build out the widget components.
 	 */
-	var widgetTasks = [];
+	let widgetTasks = [];
 	config.widgets.forEach( function( widget )
 	{
 		widgetTasks.push( 'js:' + widget );
 
 		gulp.task( 'js:' + widget, function()
 		{
-			return gulp.src( [ 'src/' + widget + '/**/*.js' ], { base: 'src' } )
+			return gulp.src( [ 'src/' + widget + '/**/*.{js,ts}' ], { base: 'src' } )
 				.pipe( plugins.sourcemaps.init() )
-				.pipe( plugins.concat( 'app.js' ) )
+				.pipe( plugins.typescript( typescript ) )
 				.pipe( config.production ? plugins.uglify() : gutil.noop() )
 				.pipe( plugins.sourcemaps.write( '.', {
 					sourceRoot: '/../../src/' + widget + '/',
