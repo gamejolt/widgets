@@ -1,0 +1,17 @@
+.toast
+	position: absolute
+	bottom: 0
+	left: $shell-padding * 2
+	right: @left
+	padding: 7px 10px
+	z-index: 1000
+
+	&-close
+		float: right
+		margin-left: 10px
+
+	&-error
+		@extend .fill-pink
+
+		a:hover
+			color: $black

@@ -1,0 +1,15 @@
+$screen-xs = 200px  // Not sure why we need xs...
+$screen-sm = 450px
+
+$in-webpack = true
+$gj-bower-lib-folder = '../../../../../bower_components'
+$gj-app-styles-folder = '../../../../'
+@import './lib/gj-lib-client/stylus/common'
+
+load-module( 'overlay-scrollbar' )
+load-module( 'button' )
+load-module( 'jolticons' )
+load-module( 'alert' )
+
+@import './styles/shell.styl'
+@import './components/**/*.styl'

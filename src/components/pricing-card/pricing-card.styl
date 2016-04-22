@@ -1,0 +1,26 @@
+.pricing-card
+	@extend .fill-gray
+	float: right
+	margin-top: -($shell-padding + $pricing-card-offset)
+	margin-left: 15px
+	padding: 10px
+	text-align: center
+
+	&-owned
+		@extend .fill-green
+
+	&-amount
+		color: $white
+		font-size: $font-size-large
+
+	&-decimal
+		font-size: $font-size-small
+
+	&-tag
+		color: $white
+		font-size: $font-size-tiny
+		font-weight: bold
+		text-transform: uppercase
+
+		&.muted
+			color: $gray-lighter

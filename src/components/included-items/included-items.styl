@@ -1,0 +1,32 @@
+.included-items
+	overflow-y: hidden
+	max-height: 0
+	transition: max-height 350ms $ease-out
+	margin-left: -($shell-padding)
+	margin-right: -($shell-padding)
+
+	&.v-transition
+		max-height: 120px
+
+	&.v-enter
+	&.v-leave
+		max-height: 0
+
+	.section-cutout
+		margin-left: 0
+		margin-right: 0
+		max-height: 120px
+
+	p
+	ul
+		margin-bottom: $shell-padding
+
+		&:last-child
+			margin-bottom: 0
+
+	ul
+		padding-left: 0
+		list-style-position: inside
+
+	li
+		margin-bottom: 5px

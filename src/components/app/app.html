@@ -1,0 +1,121 @@
+<div class="app"
+	:class="{
+		'fill-darker': !isLightTheme,
+		'fill-lightest': isLightTheme,
+		'dark': !isLightTheme,
+		'light': isLightTheme,
+		'is-loaded': isLoaded,
+		'has-invalid-key-error': invalidKey
+	}"
+	>
+
+	<div v-if="hasInvalidKey">
+		<div class="alert alert-warning text-center">
+			<p>
+				<span class="jolticon jolticon-notice"></span>
+				Invalid widget key.
+			</p>
+		</div>
+	</div>
+
+	<toast
+		v-if="hasFailure == 'setup-order'"
+		type="error"
+		transition="slide-up"
+		@dismiss="hasFailure = null"
+		>
+		Something went wrong!
+	</toast>
+
+	<div v-if="isLoaded">
+
+		<div class="header">
+
+			<pricing-card
+				v-if="step == 'main'"
+				:price="price"
+				:sellable="sellable"
+				>
+			</pricing-card>
+
+			<a
+				class="product-thumbnail hint--bottom"
+				target="_blank"
+				:href="'http://gamejolt.com/games/' + game.slug + '/' + game.id"
+				data-hint="View on Game Jolt"
+				>
+				<img class="img-responsive" alt="" :src="game.img_thumbnail">
+			</a>
+
+			<div class="product-info">
+				<div class="sans-margin title" :title="sellable.title">
+					{{ sellable.title }}
+				</div>
+
+				<div class="dev text-muted">
+					by
+					<a class="link-muted" target="_blank" :href="developer.web_site || developer.url">
+						{{ developer.display_name }}
+					</a>
+				</div>
+
+				<div class="text-muted">
+					<span
+						v-for="os in operatingSystems"
+						class="hint--bottom"
+						data-hint="{{ 'Runs on ' + (os != 'other' ? ucwords( os ) : 'some other OS or device') }}"
+						>
+						<span class="jolticon" :class="'jolticon-' + (os == 'other' ? 'other-os' : os)"></span>
+					</span>
+
+					<span class="included-link">
+					(<a class="link-help" @click="isShowingIncluded = !isShowingIncluded">what's included?</a>)
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<included-items
+			:is-showing="isShowingIncluded"
+			:sellable="sellable"
+			:builds="builds"
+			>
+		</included-items>
+
+		<div class="section-cutout" :class="{ 'section-cutout-fade': isShowingIncluded }">
+
+			<div
+				class="fade"
+				v-if="isShowingIncluded"
+				transition
+				@click="isShowingIncluded = false"
+				>
+			</div>
+
+			<payment-form
+				:user="user"
+				:game="game"
+				:sellable="sellable"
+				:pricing="pricing"
+				:price="price"
+				:payment.sync="payment"
+				@change-step="changeStep"
+				@checkout="checkout"
+				>
+			</payment-form>
+
+		</div>
+
+		<div class="address-form" v-if="step == 'address'" transition="stack">
+			<address-form
+				:address.sync="address"
+				@checkout="checkout"
+				@cancel="addressCancel"
+				>
+			</address-form>
+		</div>
+
+	</div>
+
+	<app-footer></app-footer>
+</div>

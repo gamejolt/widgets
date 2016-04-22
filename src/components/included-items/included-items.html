@@ -1,0 +1,28 @@
+<div class="included-items" v-if="isShowing" transition>
+	<div class="section-cutout scrollable overlay-scrollbar">
+
+		<p>{{ sellable.description }}</p>
+
+		<ul>
+			<li v-for="build in builds" track-by="id">
+
+				{{ build.primary_file.filename }}
+				<small class="text-muted">({{ build.primary_file.filesize | filesize }})</small>
+
+				<span v-for="os in [ 'windows', 'mac', 'linux', 'other' ]">
+					<span class="hint--top-left" data-hint="{{ 'Runs on ' + (os != 'other' ? ucwords( os ) : 'some other OS or device') }}">
+						<span
+							class="jolticon"
+							v-if="build[ 'os_' + os ] || build[ 'os_' + os + '_64' ]"
+							:class="'jolticon-' + (os == 'other' ? 'other-os' : os)"
+							>
+						</span>
+					</span>
+				</span>
+
+			</li>
+		</ul>
+
+		<p>And really warm feelings for supporting an indie developer!</p>
+	</div>
+</div>

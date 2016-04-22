@@ -1,0 +1,90 @@
+<validator name="form">
+	<form class="payment-form" novalidate>
+
+		<div class="form-group" v-if="!user">
+			<label for="amount" class="control-label">Send key to</label>
+			<div class="form-group-control">
+				<input
+					type="text"
+					class="form-control"
+					placeholder="Enter your email address..."
+					v-model="payment.email"
+					v-validate:email="{
+						required: { rule: true, message: 'Please enter an email address.' },
+						email: { rule: true, message: 'Please enter a valid email address.' },
+					}"
+					>
+			</div>
+		</div>
+		<div class="form-group" v-else>
+			<label class="control-label">Logged in as</label>
+			<div class="form-group-control">
+				<div class="user-avatar">
+					<a :href="'http://gamejolt.com' + user.url" target="_blank">
+						<img class="img-responsive" :src="user.img_avatar" :alt="user.display_name">
+					</a>
+				</div>
+				<div class="user-display-name">
+					<a class="link-unstyled" :href="'http://gamejolt.com' + user.url" target="_blank">
+						{{ user.display_name }}
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="amount" class="control-label">Name your price</label>
+			<div class="form-group-control">
+				<span class="payment-form-amount-input">
+					<span class="payment-form-amount-input-currency">$</span>
+					<input
+						id="amount"
+						type="number"
+						class="form-control"
+						step="1"
+						v-model="payment.amount | price"
+						v-validate:amount="{
+							required: { rule: true, message: 'Please an amount.' },
+							min: { rule: minAmount, message: 'The amount you entered is too low.' },
+						}"
+						>
+				</span>
+
+				<span class="text-muted" v-if="sellable.type == 'paid'">
+					({{ price }} or more)
+					<span class="hint--top-left hint--large" data-hint="The developer has set the price of this game to {{ price }}, but you are able to support them by giving more.">
+						<span class="jolticon jolticon-help-circle"></span>
+					</div>
+				</span>
+			</div>
+		</div>
+
+		<div class="form-errors" v-if="hasFormError">
+			<div class="alert alert-warning">
+				<span class="jolticon jolticon-notice"></span>
+				{{ formError }}
+			</div>
+		</div>
+
+		<div class="payment-methods" v-if="!hasFormError">
+
+			<button
+				class="btn btn-success-outline anim-fade-in stagger"
+				:disabled="$form.invalid ? 'disabled' : undefined"
+				@click.prevent="card"
+				>
+				<span class="jolticon jolticon-credit-card"></span>
+				Credit Card
+			</button>
+
+			<button
+				class="btn btn-outline anim-fade-in stagger"
+				:disabled="$form.invalid ? 'disabled' : undefined"
+				@click.prevent="paypal"
+				>
+				PayPal
+			</button>
+		</div>
+
+	</form>
+</div>

@@ -1,0 +1,22 @@
+.form-group
+	margin-bottom: 5px
+
+	// Wasn't allowing tooltips to go over buttons correctly
+	position: relative
+	z-index: 1
+
+.alert
+	@extend .anim-fade-in-enlarge
+	margin-bottom: 0
+
+.form-control
+	border: 0
+
+	.app.light &
+		border 1px solid $gray-lighter
+
+.jolticon
+	vertical-align: text-bottom
+
+.btn .jolticon
+	vertical-align: bottom
