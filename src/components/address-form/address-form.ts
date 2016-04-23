@@ -35,7 +35,7 @@ export default class AddressForm extends AddressFormData
 	ready()
 	{
 		if ( !this.address.country ) {
-			this.address.country = 'US';
+			this.address.country = 'us';
 			this.address.region = REGIONS[ this.address.country ] ? REGIONS[ this.address.country ][0].code : '';
 		}
 	}
