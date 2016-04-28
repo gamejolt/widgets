@@ -41,6 +41,7 @@ class AppData extends VueComponent
 	operatingSystems: string[] = [];
 	builds: any[] = [];
 	addresses: any[] = [];
+	minOrderAmount = 50;
 
 	payment = {
 		email: '',
@@ -132,6 +133,7 @@ export default class App extends AppData
 		this.operatingSystems = payload.operatingSystems;
 		this.builds = payload.builds;
 		this.addresses = payload.billingAddresses || [];
+		this.minOrderAmount = payload.minOrderAmount || 50;
 
 		this.isLoaded = true;
 	}

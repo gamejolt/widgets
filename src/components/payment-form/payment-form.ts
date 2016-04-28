@@ -22,6 +22,7 @@ class PaymentFormData extends VueComponent
 		'pricing',
 		'price',
 		'payment',
+		'minOrderAmount',
 	],
 	validators: {
 		email,
@@ -38,6 +39,7 @@ export default class PaymentForm extends PaymentFormData
 	sellable: any;
 	pricing: any;
 	price: string;
+	minOrderAmount: number;
 
 	data()
 	{
@@ -50,7 +52,7 @@ export default class PaymentForm extends PaymentFormData
 		this.payment.email = '';
 
 		// The rule is checked against the "form" value which is divided by 100.
-		this.minAmount = this.sellable.type == 'paid' ? this.pricing.amount / 100 : 0.50;
+		this.minAmount = this.sellable.type == 'paid' ? this.pricing.amount / 100 : this.minOrderAmount / 100;
 
 		// We have an email field if the user isn't logged in.
 		if ( !this.user ) {
