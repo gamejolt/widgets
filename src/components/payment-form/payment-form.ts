@@ -50,7 +50,7 @@ export default class PaymentForm extends PaymentFormData
 		this.payment.email = 'hworld@holo-world.com';
 
 		// The rule is checked against the "form" value which is divided by 100.
-		this.minAmount = this.pricing.amount / 100;
+		this.minAmount = this.sellable.type == 'paid' ? this.pricing.amount / 100 : 0.30;
 
 		// We have an email field if the user isn't logged in.
 		if ( !this.user ) {
