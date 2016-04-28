@@ -96,6 +96,7 @@
 			</div>
 
 			<payment-form
+				v-if="!sellable.is_owned"
 				:user="user"
 				:game="game"
 				:sellable="sellable"
@@ -106,6 +107,18 @@
 				@checkout="checkout"
 				>
 			</payment-form>
+
+			<div v-if="sellable.is_owned" class="text-center">
+				<p>You own this package!</p>
+				<a
+					:href="'http://gamejolt.com/games/' + game.slug + '/' + game.id"
+					class="btn btn-success-outline"
+					target="_blank"
+					>
+					<span class="jolticon jolticon-gamejolt"></span>
+					View Game on Game Jolt
+				</a>
+			</div>
 
 		</div>
 

@@ -133,8 +133,6 @@ export default class App extends AppData
 		this.builds = payload.builds;
 		this.addresses = payload.billingAddresses || [];
 
-		this.sellable.is_owned = false;
-
 		this.isLoaded = true;
 	}
 
