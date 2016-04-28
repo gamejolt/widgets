@@ -9,6 +9,7 @@ import { VueComponent } from './../../util/vue';
 import { ucwords } from './../../util/string';
 
 import * as AppFooter from './../footer/footer';
+import * as ProcessingOverlay from './../processing-overlay/processing-overlay';
 import * as PricingCard from './../pricing-card/pricing-card';
 import * as IncludedItems from './../included-items/included-items';
 import * as PaymentForm from './../payment-form/payment-form';
@@ -24,6 +25,7 @@ class AppData extends VueComponent
 	isLightTheme = uQuery( 'theme' ) == 'light' ? true : false;
 	isShowingIncluded = false;
 	isLoaded = false;
+	isProcessing = false;
 	step: Step = 'main';
 	ucwords = ucwords;
 
@@ -56,6 +58,7 @@ class AppData extends VueComponent
 @Component( {
 	components: {
 		AppFooter,
+		ProcessingOverlay,
 		PricingCard,
 		PaymentForm,
 		AddressForm,
@@ -137,6 +140,12 @@ export default class App extends AppData
 
 	submit( paymentMethod: PaymentMethod )
 	{
+		if ( this.isProcessing ) {
+			return;
+		}
+
+		this.isProcessing = true;
+
 		let data: any = {
 			payment_method: paymentMethod,
 			pricing_id: this.pricing.id,
@@ -168,6 +177,7 @@ export default class App extends AppData
 			.catch( ( response ) =>
 			{
 				this.hasFailure = 'setup-order';
+				this.isProcessing = false;
 			} );
 	}
 }
