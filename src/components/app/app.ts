@@ -15,13 +15,16 @@ import * as PaymentForm from './../payment-form/payment-form';
 import * as AddressForm from './../address-form/address-form';
 import * as Toast from './../toast/toast';
 
+type Step = 'main' | 'address';
+type PaymentMethod = 'cc-stripe' | 'paypal';
+
 class AppData extends VueComponent
 {
 	sellableKey: string = uQuery( 'key' );
 	isLightTheme = uQuery( 'theme' ) == 'light' ? true : false;
 	isShowingIncluded = false;
 	isLoaded = false;
-	step = 'main';
+	step: Step = 'main';
 	ucwords = ucwords;
 
 	hasInvalidKey = false;
@@ -35,6 +38,7 @@ class AppData extends VueComponent
 	priceFormatted = '';
 	operatingSystems: string[] = [];
 	builds: any[] = [];
+	addresses: any[] = [];
 
 	payment = {
 		email: '',
@@ -89,8 +93,14 @@ export default class App extends AppData
 		return (this.pricing.amount / 100).toFixed( 2 );
 	}
 
-	changeStep( step: string )
+	changeStep( step: Step )
 	{
+		// If we are trying to go to address section but we already have an address, skip it!
+		if ( step == 'address' && this.addresses.length ) {
+			this.checkout( 'paypal' );
+			return;
+		}
+
 		this.step = step;
 	}
 
@@ -99,9 +109,8 @@ export default class App extends AppData
 		this.changeStep( 'main' );
 	}
 
-	checkout( paymentMethod: string )
+	checkout( paymentMethod: PaymentMethod )
 	{
-		console.log( this );
 		this.submit( paymentMethod );
 	}
 
@@ -119,21 +128,26 @@ export default class App extends AppData
 		this.pricing = payload.sellable.pricings[0];
 		this.operatingSystems = payload.operatingSystems;
 		this.builds = payload.builds;
+		this.addresses = payload.billingAddresses || [];
 
 		this.sellable.is_owned = false;
 
 		this.isLoaded = true;
 	}
 
-	submit( paymentMethod: string )
+	submit( paymentMethod: PaymentMethod )
 	{
-		let data = {
+		let data: any = {
 			payment_method: paymentMethod,
 			pricing_id: this.pricing.id,
 			sellable_id: this.sellable.id,
 			email_address: this.payment.email,
 			amount: this.payment.amount,
 		};
+
+		if ( this.addresses.length ) {
+			data.address_id = this.addresses[0].id;
+		}
 
 		let options = {
 			withCredentials: true,
