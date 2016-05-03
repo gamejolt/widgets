@@ -152,6 +152,8 @@ export default class App extends AppData
 			sellable_id: this.sellable.id,
 			email_address: this.payment.email,
 			amount: this.payment.amount,
+
+			source: document.referrer,
 		};
 
 		if ( this.addresses.length ) {
