@@ -10,7 +10,7 @@
 				<small class="text-muted">({{ build.primary_file.filesize | filesize }})</small>
 
 				<span v-for="os in [ 'windows', 'mac', 'linux', 'other' ]">
-					<span class="hint--top-left" data-hint="{{ 'Runs on ' + (os != 'other' ? ucwords( os ) : 'some other OS or device') }}">
+					<span class="hint--bottom-left" data-hint="{{ 'Runs on ' + (os != 'other' ? ucwords( os ) : 'some other OS or device') }}">
 						<span
 							class="jolticon"
 							v-if="build[ 'os_' + os ] || build[ 'os_' + os + '_64' ]"
