@@ -13,7 +13,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
-	publicPath: '/widgets/v1/sale/',
+	publicPath: '/v1/sale/',
     filename: utils.assetsPath('[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('[id].[chunkhash].js')
   },
