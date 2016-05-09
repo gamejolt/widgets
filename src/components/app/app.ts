@@ -87,7 +87,7 @@ export default class App extends AppData
 			responseType: 'json',
 		};
 
-		qwest.get( 'http://development.gamejolt.com/site-api/widgets/sale/' + this.sellableKey, null, options )
+		qwest.get( 'https://gamejolt.com/site-api/widgets/sale/' + this.sellableKey, null, options )
 			.then( ( xhr, response ) => this.processResponse( response ) )
 			.catch( ( response ) => this.hasInvalidKey = true );
 	}
@@ -166,7 +166,7 @@ export default class App extends AppData
 			responseType: 'json',
 		};
 
-		qwest.post( 'http://development.gamejolt.com/site-api/web/checkout/setup-order', data, options )
+		qwest.post( 'https://gamejolt.com/site-api/web/checkout/setup-order', data, options )
 			.then( ( xhr, response ) =>
 			{
 				if ( typeof response.payload.success != 'undefined' && !response.payload.success ) {
