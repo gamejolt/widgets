@@ -20,6 +20,7 @@ class PaymentFormData extends VueComponent
 		'game',
 		'sellable',
 		'pricing',
+		'originalPricing',
 		'price',
 		'payment',
 		'minOrderAmount',
@@ -38,6 +39,7 @@ export default class PaymentForm extends PaymentFormData
 	game: any;
 	sellable: any;
 	pricing: any;
+	promotionalPricing?: any;
 	price: string;
 	minOrderAmount: number;
 

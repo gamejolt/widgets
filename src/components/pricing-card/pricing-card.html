@@ -10,9 +10,19 @@
 	<div v-else>
 
 		<div v-if="sellable.type == 'paid'">
+			<span class="pricing-card-discount"
+				v-if="originalPrice"
+				>
+				-{{ discount }}%
+			</span>
 			<strong class="pricing-card-amount">
 				${{ price }}
 			</strong>
+			<span class="pricing-card-amount pricing-card-amount-old"
+				v-if="originalPrice"
+				>
+				${{ originalPrice }}
+			</span>
 			<br>
 			<span class="pricing-card-tag muted">
 				or more

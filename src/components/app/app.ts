@@ -37,6 +37,7 @@ class AppData extends VueComponent
 	developer: any = {};
 	sellable: any = {};
 	pricing: any = {};
+	originalPricing?: any;
 	priceFormatted = '';
 	operatingSystems: string[] = [];
 	builds: any[] = [];
@@ -97,6 +98,15 @@ export default class App extends AppData
 		return (this.pricing.amount / 100).toFixed( 2 );
 	}
 
+	get originalPrice()
+	{
+		if ( !this.originalPricing ) {
+			return undefined;
+		}
+
+		return (this.originalPricing.amount / 100).toFixed( 2 );
+	}
+
 	changeStep( step: Step )
 	{
 		// If we are trying to go to address section but we already have an address, skip it!
@@ -129,11 +139,15 @@ export default class App extends AppData
 		this.game = payload.game;
 		this.developer = this.game.developer;
 		this.sellable = payload.sellable;
-		this.pricing = payload.sellable.pricings[0];
 		this.operatingSystems = payload.operatingSystems;
 		this.builds = payload.builds;
 		this.addresses = payload.billingAddresses || [];
 		this.minOrderAmount = payload.minOrderAmount || 50;
+
+		this.pricing = this.sellable.pricings[0];
+		if ( this.pricing.promotional ) {
+			this.originalPricing = this.sellable.pricings[1];
+		}
 
 		this.isLoaded = true;
 	}
