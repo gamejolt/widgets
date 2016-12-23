@@ -8,17 +8,14 @@
     "test": ""
   },
   "dependencies": {
-    "babel-runtime": "^5.8.0",
     "hint.css": "2.2.1",
     "vue": "1.0.21",
     "vue-validator": "2.0.2"
   },
   "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
-    "babel-plugin-transform-runtime": "^6.0.0",
-    "babel-preset-es2015": "^6.0.0",
-    "babel-preset-stage-2": "^6.0.0",
+    "@types/node": "^6.0.52",
+    "@types/qwest": "^1.7.28",
+    "@types/vue": "^1.0.31",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.23.0",
     "eventsource-polyfill": "^0.9.6",
@@ -34,7 +31,7 @@
     "stylus": "^0.54.2",
     "stylus-loader": "^2.0.0",
     "ts-loader": "^0.8.2",
-    "typescript": "^1.8.10",
+    "typescript": "^2.1.4",
     "url-loader": "^0.5.7",
     "vue-class-component": "^3.2.0",
     "vue-hot-reload-api": "^1.2.0",

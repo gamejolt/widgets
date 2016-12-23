@@ -10,7 +10,7 @@ import { VueComponent } from './../../util/vue';
 } )
 export default class Toast extends VueComponent
 {
-	timeout: NodeJS.Timer;
+	timeout?: number;
 
 	ready()
 	{
@@ -29,13 +29,15 @@ export default class Toast extends VueComponent
 
 	private _clear()
 	{
-		clearTimeout( this.timeout );
-		this.timeout = null;
+		if ( this.timeout ) {
+			clearTimeout( this.timeout );
+			this.timeout = undefined;
+		}
 	}
 
 	private _setTimer()
 	{
-		this.timeout = setTimeout( () =>
+		this.timeout = window.setTimeout( () =>
 		{
 			this.dismiss();
 		}, 3000 );

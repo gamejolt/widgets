@@ -11,7 +11,7 @@ export const price = {
 
 		return (num / 100).toFixed( 2 );
 	},
-	write: ( amount ) =>
+	write: ( amount: string ) =>
 	{
 		let num = +amount.replace( /[^\d.]/g, '' );
 		return isNaN( num ) ? 0 : parseFloat( num.toFixed( 2 ) ) * 100;

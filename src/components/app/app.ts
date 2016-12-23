@@ -1,7 +1,7 @@
-require( 'micro-query/micro-query.js' );
+import 'micro-query/micro-query.js';
 declare var uQuery: any;
 
-let qwest = require( 'qwest/qwest.min.js' );
+let qwest: Qwest.Static = require( 'qwest/qwest.min.js' );
 
 import Component from 'vue-class-component';
 import { VueComponent } from './../../util/vue';
@@ -30,7 +30,7 @@ class AppData extends VueComponent
 	ucwords = ucwords;
 
 	hasInvalidKey = false;
-	hasFailure: string = null;
+	hasFailure?: string;
 
 	user: any = {};
 	game: any = {};
@@ -88,8 +88,8 @@ export default class App extends AppData
 		};
 
 		qwest.get( 'https://gamejolt.com/site-api/widgets/sale/' + this.sellableKey, null, options )
-			.then( ( xhr, response ) => this.processResponse( response ) )
-			.catch( ( response ) => this.hasInvalidKey = true );
+			.then( ( _xhr: any, response: any ) => this.processResponse( response ) )
+			.catch( () => this.hasInvalidKey = true );
 	}
 
 	get price()
@@ -167,7 +167,7 @@ export default class App extends AppData
 		};
 
 		qwest.post( 'https://gamejolt.com/site-api/web/checkout/setup-order', data, options )
-			.then( ( xhr, response ) =>
+			.then( ( _xhr: any, response: any ) =>
 			{
 				if ( typeof response.payload.success != 'undefined' && !response.payload.success ) {
 					this.hasFailure = 'setup-order';
@@ -176,7 +176,7 @@ export default class App extends AppData
 
 				window.parent.location.href = response.payload.redirectUrl;
 			} )
-			.catch( ( response ) =>
+			.catch( () =>
 			{
 				this.hasFailure = 'setup-order';
 				this.isProcessing = false;

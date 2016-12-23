@@ -7,9 +7,9 @@ const UNITS = [
 	'PB'
 ];
 
-export function filesize( bytes )
+export function filesize( bytes: number )
 {
-	if ( isNaN( parseFloat( bytes ) ) || !isFinite( bytes ) ) {
+	if ( !isFinite( bytes ) ) {
 		return '?';
 	}
 	else if ( bytes < 1024 ) {

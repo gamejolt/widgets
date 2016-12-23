@@ -1,17 +1,17 @@
-let Vue = require( 'vue' );
-let VueValidator = require( 'vue-validator' );
+import * as Vue from 'vue';
+let vueValidator = require( 'vue-validator' );
 
 // We need to register the validator before we import app components.
-Vue.use( VueValidator );
+Vue.use( vueValidator );
 
-let App = require( './components/app/app.vue' );
+let app = require( './components/app/app.vue' );
 
-require( './main.styl' );
-require( 'hint.css/hint.base.css' );
+import './main.styl';
+import 'hint.css/hint.base.css';
 
-let vue = new Vue( {
+new Vue( {
 	el: 'body',
 	components: {
-		App,
+		App: app,
 	},
 } );
