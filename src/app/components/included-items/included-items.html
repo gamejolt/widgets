@@ -1,0 +1,35 @@
+<div class="included-items">
+	<div class="row">
+		<div class="col-xs-6 col-centered">
+
+			<p v-if="package.description">
+				{{ package.description }}
+			</p>
+
+			<ul>
+				<li v-for="build of packagePayload.builds" :key="build.id">
+
+					{{ build.primary_file.filename }}
+					<small class="text-muted">
+						({{ build.primary_file.filesize | filesize }})
+					</small>
+
+					<span v-for="os of [ 'windows', 'mac', 'linux', 'other' ]">
+						<span class="hint--bottom-left"
+							:data-hint="packageCard.platformSupportInfo[ os ].tooltip"
+							>
+							<app-jolticon
+								v-if="build[ 'os_' + os ] || build[ 'os_' + os + '_64' ]"
+								:icon="packageCard.platformSupportInfo[ os ].icon"
+								/>
+						</span>
+					</span>
+
+				</li>
+			</ul>
+
+			<p>And really warm feelings for supporting an indie developer!</p>
+
+		</div>
+	</div>
+</div>

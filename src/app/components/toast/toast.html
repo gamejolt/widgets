@@ -1,0 +1,15 @@
+<div
+	class="toast"
+	:class="{
+		'toast-error fill-pink': type === 'error',
+		'toast-info': type === 'info',
+	}"
+	@mouseenter="focus"
+	@mouseleave="blur"
+	>
+	<a class="toast-close" @click="dismiss">
+		<app-jolticon icon="remove" />
+	</a>
+	<app-jolticon icon="notice" v-if="type === 'error'" />
+	<slot></slot>
+</div>

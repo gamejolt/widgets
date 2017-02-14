@@ -1,0 +1,50 @@
+@import '~styles/variables'
+
+.payment-form
+	margin-bottom: $shell-padding
+
+	.user-avatar
+		width: $input-height-base
+		float: left
+
+	.user-display-name
+		margin-left: $input-height-base + $grid-gutter-width
+		line-height: $input-height-base
+
+	&-amount-input
+		position: relative
+		display: inline-block
+
+		input
+			display: inline-block
+			width: 120px
+			margin-right: 10px
+			padding-left: 25px
+
+		&-currency
+			position: absolute
+			content: '$'
+			top: 6px
+			left: 10px
+			color: $gray-light
+			z-index: 2
+
+	.control-label
+		float: left
+		width: $thumbnail-width
+		text-align: right
+		line-height: $input-height-base
+
+	.form-group
+		clear: left
+
+	.form-group-control
+		margin-left: $thumbnail-width + $grid-gutter-width
+
+	.form-errors
+		margin-left: $thumbnail-width + $grid-gutter-width
+
+	.payment-methods
+		clear: both
+		text-align: left
+		margin-left: $thumbnail-width + $grid-gutter-width

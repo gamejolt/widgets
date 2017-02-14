@@ -1,0 +1,31 @@
+@import '~styles/variables'
+@import '../../../lib/gj-lib-client/stylus/common/mixins'
+
+.game-header
+	clearfix()
+	margin-bottom: $grid-gutter-width
+
+	.product-thumbnail
+		display: none
+
+		@media $media-sm-up
+			display: block
+			float: left
+			width: $thumbnail-width
+
+	.product-info
+		@media $media-sm-up
+			margin-left: $thumbnail-width + $grid-gutter-width
+
+.title
+	text-overflow()
+	margin-right: 15px
+	font-weight: bold
+	font-size: $font-size-large
+
+.dev
+	margin-bottom: 5px
+	font-family: $font-family-base
+
+.included-link
+	user-select: none

@@ -1,0 +1,42 @@
+@import '../node_modules/hint.css/hint.base.css';
+
+@import '~styles/variables'
+@import '../lib/gj-lib-client/stylus/common/index'
+
+@import '../lib/gj-lib-client/components/overlay-scrollbar/overlay-scrollbar'
+@import '../lib/gj-lib-client/components/jolticons/jolticons'
+@import '../lib/gj-lib-client/components/button/button'
+@import '../lib/gj-lib-client/components/alert/alert'
+
+html, body
+	background-color: transparent
+
+body
+	height: $xs-height
+	padding-top: $pricing-card-offset
+	overflow: hidden
+
+	@media $media-sm-up
+		height: $height
+
+@import './styles/tooltip'
+
+/**
+ * Forms
+ */
+.form-group
+	margin-bottom: 5px
+
+	// Wasn't allowing tooltips to go over buttons correctly
+	position: relative
+	z-index: 1
+
+.alert
+	@extend .anim-fade-in-enlarge
+	margin-bottom: 0
+
+.form-control
+	border: 0
+
+	.shell.light &
+		border 1px solid $gray-lighter

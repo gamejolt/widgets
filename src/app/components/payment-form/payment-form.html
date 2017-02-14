@@ -1,0 +1,108 @@
+<form class="payment-form" novalidate>
+
+	<div class="form-group" v-if="!user">
+		<label for="email" class="control-label">
+			Send key to
+		</label>
+
+		<div class="form-group-control">
+			<input type="text" class="form-control"
+				id="email"
+				name="email"
+				placeholder="Enter your email address..."
+				v-model="payment.email"
+				v-validate.initial
+				data-vv-rules="required|email"
+				>
+		</div>
+	</div>
+	<div class="form-group" v-else>
+		<label class="control-label">
+			Logged in as
+		</label>
+
+		<div class="form-group-control">
+			<div class="user-avatar">
+				<a :href="`http://gamejolt.com${user.url}`" target="_blank">
+					<img class="img-responsive" :src="user.img_avatar" :alt="user.display_name">
+				</a>
+			</div>
+			<div class="user-display-name">
+				<a class="link-unstyled" :href="'http://gamejolt.com' + user.url" target="_blank">
+					{{ user.display_name }}
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="amount" class="control-label">
+			Name your price
+		</label>
+
+		<div class="form-group-control">
+			<span class="payment-form-amount-input">
+				<span class="payment-form-amount-input-currency">$</span>
+				<input type="number" class="form-control"
+					id="amount"
+					name="amount"
+					step="1"
+					v-model="payment.amount"
+					v-validate.initial
+					:data-vv-rules="`required|min_value:${minAmount}|decimal:2`"
+					>
+			</span>
+
+			<span class="text-muted" v-if="sellable.type === 'paid'">
+				(${{ price }} or more)
+				<span class="hint--top-left hint--large"
+					:data-hint="'The developer has set the price of this game to $' + price + ', but you are able to support them by giving more.'">
+					<app-jolticon icon="help-circle" />
+				</div>
+			</span>
+		</div>
+	</div>
+
+	<div class="form-errors" v-if="errors.any()">
+
+		<div class="alert alert-warning">
+			<app-jolticon icon="notice" />
+			<span v-if="errors.has( 'email:required' )">
+				Please enter an email address.
+			</span>
+			<span v-else-if="errors.has( 'email:email' )">
+				Please enter a valid email address.
+			</span>
+			<span v-else-if="errors.has( 'amount:required' )">
+				Please enter an amount.
+			</span>
+			<span v-else-if="errors.has( 'amount:min_value' )">
+				The amount you entered is too low.
+			</span>
+			<span v-else-if="errors.has( 'amount:decimal' )">
+				Please enter a correct amount.
+			</span>
+		</div>
+
+	</div>
+	<div class="payment-methods" v-else>
+
+		<button
+			class="btn btn-success-outline anim-fade-in stagger"
+			:disabled="!fields.dirty() || !fields.valid() ? 'disabled' : undefined"
+			@click.prevent="submit( 'cc-stripe' )"
+			>
+			<app-jolticon icon="credit-card" />
+			Credit Card
+		</button>
+
+		<button
+			class="btn btn-outline anim-fade-in stagger"
+			:disabled="!fields.dirty() || !fields.valid() ? 'disabled' : undefined"
+			@click.prevent="submit( 'paypal' )"
+			>
+			PayPal
+		</button>
+	</div>
+
+</form>

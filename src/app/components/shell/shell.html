@@ -1,0 +1,40 @@
+<div class="shell"
+	:class="{
+		'fill-darker': !isLightTheme,
+		'fill-lightest': isLightTheme,
+		'dark': !isLightTheme,
+		'light': isLightTheme,
+		'is-loaded': isLoaded,
+		'has-invalid-key-error': hasInvalidKey
+	}"
+	>
+
+	<div
+		v-if="hasInvalidKey"
+		class="alert alert-warning text-center"
+		>
+		<p>
+			<app-jolticon icon="notice" />
+			Invalid widget key.
+		</p>
+	</div>
+
+	<app-processing-overlay v-if="isProcessing"></app-processing-overlay>
+
+	<transition name="slide-up">
+		<app-toast
+			v-if="hasFailure === 'setup-order'"
+			type="error"
+			@dismiss="$store.commit( 'clearFailure' )"
+			>
+			Something went wrong!
+		</app-toast>
+	</transition>
+
+	<div v-if="isLoaded">
+		<app-game-header></app-game-header>
+		<component :is="view"></component>
+	</div>
+
+	<app-footer></app-footer>
+</div>
