@@ -79,7 +79,7 @@ export const store = new Vuex.Store<StoreState>( {
 	getters: {
 		price: ( state ) =>
 		{
-			return state.pricing && (state.pricing.amount / 100).toFixed( 2 );
+			return state.pricing && (state.pricing.amount || state.minOrderAmount / 100).toFixed( 2 );
 		},
 		originalPrice( state )
 		{
