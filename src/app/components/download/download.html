@@ -1,0 +1,148 @@
+<div>
+
+	<div>
+		<app-fade-collapse style="max-height: 70px" @required="isDescriptionCollapsed = true">
+			{{ package.description }}
+		</app-fade-collapse>
+
+		<span v-if="isDescriptionCollapsed">
+			<a class="link-muted" @click="isShowingDescription = true">
+				(more)
+			</a>
+		</span>
+	</div>
+
+	<div :class="!package.description ? 'row' : ''">
+		<div :class="!package.description ? 'col-xs-5 col-centered' : ''">
+
+			<div class="download-controls">
+
+				<button class="btn btn-primary-outline"
+					v-if="browserBuild"
+					:class="{
+						'btn-block': !package.description,
+					}"
+					@click="buildClick( browserBuild )"
+					>
+					<app-jolticon icon="play" />
+					<span>Play</span>
+					<app-jolticon class="jolticon-addon" :icon="showcasedBrowserIcon" />
+				</button>
+
+				<button class="btn btn-success-outline"
+					v-if="downloadableBuild"
+					:class="{
+						'btn-block': !package.description,
+					}"
+					@click="buildClick( downloadableBuild )"
+					>
+					<app-jolticon icon="download" />
+					<span>Download</span>
+					<small v-if="platformSupportInfo[ showcasedOs ].arch === '64'">
+						64-bit
+					</small>
+					<small>({{ downloadableBuild.primary_file.filesize | filesize }})</small>
+					<app-jolticon class="jolticon-addon" :icon="showcasedOsIcon" />
+				</button>
+
+				<!--
+					If this package only has "Other" builds, then we make it look like a download
+					button with a [...] after.
+					If the package has normal builds too, then we just show it as a more options sparse button.
+				-->
+				<button class="btn"
+					v-if="extraBuilds.length"
+					:class="{
+						'btn-block': !package.description,
+						'btn-success-outline': otherOnly,
+						'btn-outline': !otherOnly,
+					}"
+					@click="isShowingMoreOptions = true"
+					>
+					<app-jolticon icon="ellipsis-h" />
+					<span v-if="otherOnly">
+						<app-jolticon icon="download" />
+						<span>Download</span>
+						<app-jolticon class="jolticon-addon" icon="other-os" />
+					</span>
+					<span v-if="!otherOnly">more</span>
+				</button>
+
+			</div>
+
+		</div>
+	</div>
+
+	<app-modal v-if="isShowingDescription" @close="isShowingDescription = false">
+
+		{{ package.description }}
+
+	</app-modal>
+
+	<app-modal v-if="isShowingMoreOptions" @close="isShowingMoreOptions = false">
+		<div class="row">
+			<div class="col-xs-6 col-centered">
+
+				<span
+					v-for="extraBuild in extraBuilds"
+					:key="extraBuild.icon + '-' + extraBuild.build.id"
+					>
+					<!--
+						If a ROM, we want to show a tooltip on what kind.
+					-->
+					<a class="btn btn-outline btn-block"
+						@click="buildClick( extraBuild.build, true )"
+						:class="{ 'hint--bottom': extraBuild.build.type === GameBuild.TYPE_ROM }"
+						:data-hint="extraBuild.build.type === GameBuild.TYPE_ROM
+							? GameBuild.emulatorInfo[ extraBuild.build.emulator_type ]
+							: undefined"
+						>
+						<app-jolticon :icon="extraBuild.icon" />
+
+						<!--
+							We show the filename if it's an "Other" build.
+						-->
+						<span v-if="!extraBuild.build.os_other">
+							<span v-if="extraBuild.build.type === 'downloadable'">
+								Download
+							</span>
+							<span v-else-if="extraBuild.build.type === 'rom'">
+								Download ROM
+							</span>
+							<span v-else>
+								Play
+							</span>
+						</span>
+
+						<span v-if="extraBuild.build.os_other">
+							{{ extraBuild.build.primary_file.filename }}
+						</span>
+
+						<small v-if="extraBuild.arch === '64'">64-bit</small>
+
+						<small class="text-muted">({{ extraBuild.build.primary_file.filesize | filesize }})</small>
+					</a>
+				</span>
+
+			</div>
+		</div>
+	</app-modal>
+
+	<app-modal v-if="isShowingPayment" @close="isShowingPayment = false">
+
+		<p>
+			<span v-if="!pricing.amount">
+				Show {{ developer.display_name }} some <app-jolticon icon="heart" /> by supporting them.
+			</span>
+			<span v-else>
+				This developer suggests paying <strong>{{ price }}</strong>, but you're able to pay what you want.
+			</span>
+		</p>
+
+		<app-payment></app-payment>
+
+		<a class="link-muted" @click="buildClick( clickedBuild )">No thanks, take to me to the game.</a>
+
+	</app-modal>
+
+</div>

@@ -1,0 +1,27 @@
+@import '~styles/variables'
+@import '../../../lib/gj-lib-client/stylus/common/mixins'
+
+.modal
+	position: absolute
+	top: $shell-padding
+	right: $shell-padding
+	bottom: $shell-padding
+	left: $shell-padding
+	padding: $grid-gutter-width
+	box-shadow: 0 0 10px $black
+	border: 1px solid $gray
+	z-index: 10
+
+	&.v-enter-active
+	&.v-leave-active
+		transition: all 500ms $strong-ease-out
+
+	&.v-enter
+	&.v-leave-to
+		opacity: 0
+		transform: scale( 1.2 )
+
+	&-close
+		float: right
+		margin-left: $shell-padding
+		margin-bottom: $shell-padding

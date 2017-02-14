@@ -1,0 +1,89 @@
+<div>
+
+	<p>
+		<app-jolticon icon="info-circle" />
+		<span>Because of international tax laws, we are required to collect this information.</span>
+	</p>
+
+	<form novalidate>
+
+		<div class="form-group">
+			<select class="form-control"
+				id="country"
+				name="country"
+				v-model="address.country"
+				@change="countryChanged"
+				>
+				<option v-for="country of countries" :key="country.code" :value="country.code">
+					{{ country.name }}
+				</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<input type="text" class="form-control"
+				id="street1"
+				name="street1"
+				placeholder="Street Address"
+				v-model="address.street1"
+				v-validate="'required'"
+				>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="form-group">
+					<div v-if="!regions">
+						<input type="text" class="form-control"
+							id="region"
+							name="region"
+							placeholder="State/Province"
+							v-model="address.region"
+							v-validate="'required'"
+							>
+					</div>
+					<div v-else>
+						<select class="form-control"
+							id="region"
+							name="region"
+							v-model="address.region"
+							>
+							<option v-for="region in regions" :key="region.code" :value="region.code">
+								{{ region.name }}
+							</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="form-group">
+					<input type="text" class="form-control"
+						id="postcode"
+						name="postcode"
+						placeholder="Zip/Postal Code"
+						v-model="address.postcode"
+						v-validate="'required'"
+						>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-errors" v-if="errors.any()">
+			<div class="alert alert-warning">
+				<app-jolticon icon="notice" />
+				{{ errors.first() }}
+			</div>
+		</div>
+		<div v-else>
+			<button
+				class="btn btn-success-outline"
+				:disabled="!fields.valid() ? 'disabled' : undefined"
+				@click.prevent="submit"
+				>
+				Proceed to PayPal
+			</button>
+		</div>
+
+	</form>
+
+</div>

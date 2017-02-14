@@ -1,9 +1,0 @@
-{
-  "name": "game-jolt-widgets",
-  "version": "0.1.0",
-  "dependencies": {
-    "bootstrap-stylus": "hworld/bootstrap-stylus#master",
-    "qwest": "4.4.0",
-    "micro-query": "0.1.2"
-  }
-}

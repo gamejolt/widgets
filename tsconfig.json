@@ -4,16 +4,25 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "removeComments": false,
+    "isolatedModules": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "noImplicitThis": true,
     "allowJs": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "importHelpers": true,
+    "lib": [
+      "dom",
+      "es2015"
+    ]
   },
   "exclude": [
-    "dist",
+    "build",
     "node_modules",
-    "bower_components"
+    "src/bower-lib"
   ]
 }
+

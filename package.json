@@ -1,46 +1,30 @@
 {
-  "name": "game-jolt-widgets",
-  "version": "0.1.0",
+  "name": "widgets",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "test": ""
+    "dev": "gulp watch",
+    "build": "gulp --production"
   },
   "dependencies": {
-    "hint.css": "2.2.1",
-    "vue": "1.0.21",
-    "vue-validator": "2.0.2"
+    "bootstrap-stylus": "hworld/bootstrap-stylus#master",
+    "hint.css": "2.4.1",
+    "core-js": "2.4.1",
+    "qs": "6.3.0",
+    "superagent": "3.4.1",
+    "vee-validate": "2.0.0-beta.22",
+    "vue": "2.1.10",
+    "vue-class-component": "4.4.0",
+    "vue-property-decorator": "3.4.0",
+    "vuex": "2.1.2",
+    "vuex-class": "0.1.3",
+    "ua-parser-js": "0.7.12",
+    "reflect-metadata": "0.1.9"
   },
   "devDependencies": {
-    "@types/node": "^6.0.52",
-    "@types/qwest": "^1.7.28",
-    "@types/vue": "^1.0.31",
-    "connect-history-api-fallback": "^1.1.0",
-    "css-loader": "^0.23.0",
-    "eventsource-polyfill": "^0.9.6",
-    "express": "^4.13.3",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.4",
-    "function-bind": "^1.0.2",
-    "html-webpack-plugin": "^2.8.1",
-    "http-proxy-middleware": "^0.12.0",
-    "json-loader": "^0.5.4",
-    "ora": "^0.2.0",
-    "shelljs": "^0.6.0",
-    "stylus": "^0.54.2",
-    "stylus-loader": "^2.0.0",
-    "ts-loader": "^0.8.2",
-    "typescript": "^2.1.4",
-    "url-loader": "^0.5.7",
-    "vue-class-component": "^3.2.0",
-    "vue-hot-reload-api": "^1.2.0",
-    "vue-html-loader": "^1.0.0",
-    "vue-loader": "^8.2.1",
-    "vue-style-loader": "^1.0.0",
-    "webpack": "^1.12.2",
-    "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.6.0",
-    "webpack-merge": "^0.8.3"
+    "@types/qs": "6.2.30",
+    "@types/superagent": "2.0.36",
+    "@types/ua-parser-js": "0.7.30",
+    "game-jolt-frontend-lib": "gamejolt/frontend-lib#master"
   }
 }
