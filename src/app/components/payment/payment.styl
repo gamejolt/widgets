@@ -17,9 +17,12 @@
 
 		input
 			display: inline-block
-			width: 120px
+			width: 80px
 			margin-right: 10px
 			padding-left: 25px
+
+			@media $media-sm-up
+				width: 120px
 
 		&-currency
 			position: absolute
@@ -31,20 +34,24 @@
 
 	.control-label
 		float: left
-		width: $thumbnail-width
 		text-align: right
 		line-height: $input-height-base
+		width: 100px
+
+		@media $media-sm-up
+			width: $thumbnail-width
 
 	.form-group
 		clear: left
 
 	.form-group-control
-		margin-left: $thumbnail-width + $grid-gutter-width
-
 	.form-errors
-		margin-left: $thumbnail-width + $grid-gutter-width
+	.payment-methods
+		margin-left: 100px + $grid-gutter-width
+
+		@media $media-sm-up
+			margin-left: $thumbnail-width + $grid-gutter-width
 
 	.payment-methods
 		clear: both
 		text-align: left
-		margin-left: $thumbnail-width + $grid-gutter-width
