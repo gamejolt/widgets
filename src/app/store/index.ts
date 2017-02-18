@@ -121,7 +121,7 @@ export const store = new Vuex.Store<StoreState>( {
 				}
 			}
 
-			if ( state.sellable!.type === Sellable.TYPE_PAID ) {
+			if ( state.sellable!.type === Sellable.TYPE_PAID && !state.sellable!.is_owned ) {
 				state.view = 'AppPayment';
 			}
 
