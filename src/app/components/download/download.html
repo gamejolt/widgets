@@ -83,7 +83,7 @@
 		<div class="row">
 			<div class="col-xs-6 col-centered">
 
-				<span
+				<div
 					v-for="extraBuild in extraBuilds"
 					:key="extraBuild.icon + '-' + extraBuild.build.id"
 					>
@@ -122,7 +122,8 @@
 
 						<small class="text-muted">({{ extraBuild.build.primary_file.filesize | filesize }})</small>
 					</a>
-				</span>
+					<br>
+				</div>
 
 			</div>
 		</div>
