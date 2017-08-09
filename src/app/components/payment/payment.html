@@ -53,7 +53,9 @@
 					({{ price | currency}} or more)
 
 					<span
-						v-app-tooltip="`The developer has set the price of this game to ${currency(price)}, but you are able to support them by giving more.`">
+						class="hint--top-left hint--large"
+						:data-hint="`The developer has set the price of this game to ${currency(price)}, but you are able to support them by giving more.`"
+						>
 						<app-jolticon icon="help-circle" />
 					</span>
 				</span>

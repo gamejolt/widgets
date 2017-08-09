@@ -10,7 +10,6 @@ import { Environment } from '../../../lib/gj-lib-client/components/environment/e
 import { AppModal } from '../modal/modal';
 import { AppIncludedItems } from '../included-items/included-items';
 import { Store } from '../../store/index';
-import { AppTooltip } from '../../../lib/gj-lib-client/components/tooltip/tooltip';
 
 @View
 @Component({
@@ -19,9 +18,6 @@ import { AppTooltip } from '../../../lib/gj-lib-client/components/tooltip/toolti
 		AppPricingCard,
 		AppModal,
 		AppIncludedItems,
-	},
-	directives: {
-		AppTooltip,
 	},
 })
 export class AppGameHeader extends Vue {

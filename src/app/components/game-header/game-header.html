@@ -3,10 +3,10 @@
 	<app-pricing-card />
 
 	<a
-		class="product-thumbnail"
+		class="product-thumbnail hint--bottom"
 		target="_blank"
 		:href="gameUrl"
-		v-app-tooltip="`View on Game Jolt`"
+		data-hint="View on Game Jolt"
 		>
 		<img class="img-responsive" alt="" :src="game.img_thumbnail">
 	</a>
@@ -26,7 +26,8 @@
 		<div class="text-muted">
 			<span
 				v-for="supportKey of packageCard.platformSupport"
-				v-app-tooltip="packageCard.platformSupportInfo[ supportKey ].tooltip"
+				class="hint--bottom"
+				:data-hint="packageCard.platformSupportInfo[ supportKey ].tooltip"
 				>
 				<app-jolticon :icon="packageCard.platformSupportInfo[ supportKey ].icon" />
 			</span>

@@ -9,7 +9,6 @@ import { ucwords } from '../../../lib/gj-lib-client/vue/filters/ucwords';
 import { AppJolticon } from '../../../lib/gj-lib-client/vue/components/jolticon/jolticon';
 import { AppAddress } from '../address/address';
 import { AppModal } from '../modal/modal';
-import { AppTooltip } from '../../../lib/gj-lib-client/components/tooltip/tooltip';
 import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
 import { AppUserAvatar } from '../../../lib/gj-lib-client/components/user/user-avatar/user-avatar';
 
@@ -20,9 +19,6 @@ import { AppUserAvatar } from '../../../lib/gj-lib-client/components/user/user-a
 		AppAddress,
 		AppUserAvatar,
 		AppModal,
-	},
-	directives: {
-		AppTooltip,
 	},
 	filters: {
 		currency,

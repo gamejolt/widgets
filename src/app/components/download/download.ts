@@ -14,7 +14,6 @@ import { AppModal } from '../../components/modal/modal';
 import { Sellable } from '../../../lib/gj-lib-client/components/sellable/sellable.model';
 import { AppFadeCollapse } from '../../components/fade-collapse/fade-collapse';
 import { AppPayment } from '../payment/payment';
-import { AppTooltip } from '../../../lib/gj-lib-client/components/tooltip/tooltip';
 import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
 
 @View
@@ -24,9 +23,6 @@ import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
 		AppModal,
 		AppFadeCollapse,
 		AppPayment,
-	},
-	directives: {
-		AppTooltip,
 	},
 	filters: {
 		filesize,

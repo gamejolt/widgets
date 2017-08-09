@@ -81,7 +81,8 @@
 					<a
 						class="btn btn-outline btn-block"
 						@click="buildClick( extraBuild.build, true )"
-						v-app-tooltip="
+						:class="{ 'hint--bottom': extraBuild.build.type === GameBuild.TYPE_ROM }"
+						:data-hint="
 							extraBuild.build.type === GameBuild.TYPE_ROM
 							? GameBuild.emulatorInfo[ extraBuild.build.emulator_type ]
 							: undefined

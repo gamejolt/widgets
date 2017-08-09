@@ -15,11 +15,15 @@
 					</small>
 
 					<template v-for="os of [ 'windows', 'mac', 'linux', 'other' ]">
-						<app-jolticon
-							v-if="build[ 'os_' + os ] || build[ 'os_' + os + '_64' ]"
-							:icon="packageCard.platformSupportInfo[ os ].icon"
-							v-app-tooltip="packageCard.platformSupportInfo[ os ].tooltip"
-							/>
+						<span
+							class="hint--bottom-left"
+							:data-hint="packageCard.platformSupportInfo[ os ].tooltip"
+							>
+							<app-jolticon
+								v-if="build[ 'os_' + os ] || build[ 'os_' + os + '_64' ]"
+								:icon="packageCard.platformSupportInfo[ os ].icon"
+								/>
+						</span>
 					</template>
 
 				</li>

@@ -1,10 +1,12 @@
-@import '~styles/variables'
-@import '../lib/gj-lib-client/stylus/common'
+@require '../node_modules/hint.css/hint.base.css'
 
-@import '../lib/gj-lib-client/components/overlay-scrollbar/overlay-scrollbar'
-@import '../lib/gj-lib-client/components/jolticons/jolticons'
-@import '../lib/gj-lib-client/components/button/button'
-@import '../lib/gj-lib-client/components/alert/alert'
+@require '~styles/variables'
+@require '../lib/gj-lib-client/stylus/common'
+
+@require '../lib/gj-lib-client/components/overlay-scrollbar/overlay-scrollbar'
+@require '../lib/gj-lib-client/components/jolticons/jolticons'
+@require '../lib/gj-lib-client/components/button/button'
+@require '../lib/gj-lib-client/components/alert/alert'
 
 html, body
 	background-color: transparent
@@ -13,6 +15,8 @@ body
 	height: $shell-height
 	padding-top: $pricing-card-offset
 	overflow: hidden
+
+@require './styles/tooltip'
 
 /**
  * Forms
