@@ -1,23 +1,26 @@
-import * as Vue from 'vue';
+import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { State } from 'vuex-class';
 import * as View from '!view!./pricing-card.html?style=./pricing-card.styl';
 
-import { Sellable } from '../../../lib/gj-lib-client/components/sellable/sellable.model';
+import { Store } from '../../store/index';
+import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
 
 @View
 @Component({
-	name: 'pricing-card',
+	filters: {
+		currency,
+	},
 })
-export class AppPricingCard extends Vue
-{
-	@State sellable: Sellable;
+export class AppPricingCard extends Vue {
+	@State sellable: Store['sellable'];
+	@State price: Store['price'];
+	@State originalPrice: Store['originalPrice'];
 
-	get discount()
-	{
-		const price = parseInt( this.$store.getters.price, 10 );
-		const originalPrice = parseInt( this.$store.getters.originalPrice, 10 );
+	get discount() {
+		const price = this.price!;
+		const originalPrice = this.originalPrice!;
 
-		return ((originalPrice - price) / originalPrice * 100).toFixed( 0 );
+		return ((originalPrice - price) / originalPrice).toFixed(0);
 	}
 }

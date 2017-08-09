@@ -4,43 +4,40 @@
 	}"
 	>
 
-	<div v-if="sellable.is_owned">
+	<template v-if="sellable.is_owned">
 		<strong>
 			OWNED
 		</strong>
-	</div>
-	<div v-else>
-
-		<div v-if="sellable.type === 'paid'">
+	</template>
+	<template v-else>
+		<template v-if="sellable.type === 'paid'">
 			<span class="pricing-card-discount"
-				v-if="$store.getters.originalPrice"
+				v-if="originalPrice"
 				>
 				-{{ discount }}%
 			</span>
 			<strong class="pricing-card-amount">
-				${{ $store.getters.price }}
+				{{ price | currency }}
 			</strong>
 			<span class="pricing-card-amount pricing-card-amount-old"
-				v-if="$store.getters.originalPrice"
+				v-if="originalPrice"
 				>
-				${{ $store.getters.originalPrice }}
+				{{ originalPrice | currency }}
 			</span>
 			<br>
 			<span class="pricing-card-tag muted">
 				or more
 			</span>
-		</div>
-
-		<div v-if="sellable.type === 'pwyw'">
+		</template>
+		<template v-else-if="sellable.type === 'pwyw'">
 			<span class="pricing-card-tag">
 				name your price
 			</span>
-		</div>
-
-		<div v-if="sellable.type === 'free'">
+		</template>
+		<template v-else-if="sellable.type === 'free'">
 			<strong class="pricing-card-amount">
 				FREE
 			</strong>
-		</div>
-	</div>
+		</template>
+	</template>
 </div>

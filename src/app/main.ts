@@ -1,19 +1,25 @@
 import '../lib/gj-lib-client/utils/polyfills';
-import * as Vue from 'vue';
-const VeeValidate = require( 'vee-validate' );
+import './main.styl';
+
+import Vue from 'vue';
+import * as VeeValidate from 'vee-validate';
 
 import { store } from './store/index';
 import { Payload } from '../lib/gj-lib-client/components/payload/payload-service';
 import { App } from './app';
-import { Referrer } from '../lib/gj-lib-client/components/referrer/referrer.service';
 
-Vue.use( VeeValidate );
+const VueGettext = require('vue-gettext');
 
-Payload.initVue( store );
-Referrer.init();
+Vue.use(VeeValidate);
+Vue.use(VueGettext, {
+	silent: true,
+	translations: {},
+});
 
-new Vue( {
+Payload.init(store);
+
+new Vue({
 	el: '#app',
 	store,
-	render: ( h ) => h( App ),
-} );
+	render: h => h(App),
+});

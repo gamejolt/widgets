@@ -1,6 +1,14 @@
 {
-  "typescript.tsdk": "./node_modules/typescript/lib",
-  "files.associations": {
-    "*.html": "vue"
-  }
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"files.associations": {
+		"*.html": "vue-html"
+	},
+	"emmet.syntaxProfiles": {
+		"vue-html": "html"
+	},
+	"prettier.useTabs": true,
+	"prettier.singleQuote": true,
+	"prettier.trailingComma": "es5",
+	"prettier.printWidth": 100,
+	"editor.formatOnSave": true
 }

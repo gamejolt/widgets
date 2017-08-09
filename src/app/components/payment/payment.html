@@ -23,11 +23,7 @@
 			</label>
 
 			<div class="form-group-control">
-				<div class="user-avatar">
-					<a :href="`http://gamejolt.com${user.url}`" target="_blank">
-						<img class="img-responsive" :src="user.img_avatar" :alt="user.display_name">
-					</a>
-				</div>
+				<app-user-avatar :user="user" />
 				<div class="user-display-name">
 					<a class="link-unstyled" :href="'http://gamejolt.com' + user.url" target="_blank">
 						{{ user.display_name }}
@@ -54,10 +50,10 @@
 				</span>
 
 				<span class="text-muted" v-if="sellable.type === 'paid'">
-					(${{ price }} or more)
+					({{ price | currency}} or more)
 
-					<span class="hint--top-left hint--large"
-						:data-hint="'The developer has set the price of this game to $' + price + ', but you are able to support them by giving more.'">
+					<span
+						v-app-tooltip="`The developer has set the price of this game to ${currency(price)}, but you are able to support them by giving more.`">
 						<app-jolticon icon="help-circle" />
 					</span>
 				</span>
@@ -68,28 +64,28 @@
 
 			<div class="alert alert-warning">
 				<app-jolticon icon="notice" />
-				<span v-if="errors.has( 'email:required' )">
+				<template v-if="errors.has( 'email:required' )">
 					Please enter an email address.
-				</span>
-				<span v-else-if="errors.has( 'email:email' )">
+				</template>
+				<template v-else-if="errors.has( 'email:email' )">
 					Please enter a valid email address.
-				</span>
-				<span v-else-if="errors.has( 'amount:required' )">
+				</template>
+				<template v-else-if="errors.has( 'amount:required' )">
 					Please enter an amount.
-				</span>
-				<span v-else-if="errors.has( 'amount:min_value' )">
+				</template>
+				<template v-else-if="errors.has( 'amount:min_value' )">
 					The amount you entered is too low.
-				</span>
-				<span v-else-if="errors.has( 'amount:decimal' )">
+				</template>
+				<template v-else-if="errors.has( 'amount:decimal' )">
 					Please enter a correct amount.
-				</span>
+				</template>
 			</div>
 
 		</div>
 		<div class="payment-methods" v-else>
 			<button
-				class="btn btn-success-outline"
-				:disabled="!fields.valid() ? 'disabled' : undefined"
+				class="btn btn-outline"
+				:disabled="errors.any() ? 'disabled' : undefined"
 				@click.prevent="submit( 'cc-stripe' )"
 				>
 				<app-jolticon icon="credit-card" />
@@ -98,7 +94,7 @@
 
 			<button
 				class="btn btn-outline"
-				:disabled="!fields.valid() ? 'disabled' : undefined"
+				:disabled="errors.any() ? 'disabled' : undefined"
 				@click.prevent="submit( 'paypal' )"
 				>
 				PayPal
@@ -108,7 +104,7 @@
 	</form>
 
 	<app-modal v-if="isShowingAddress" @close="isShowingAddress = false">
-		<app-address></app-address>
+		<app-address />
 	</app-modal>
 
 </div>

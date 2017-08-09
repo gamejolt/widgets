@@ -1,41 +1,48 @@
-import * as Vue from 'vue';
+import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import { State, Getter } from 'vuex-class';
+import { State, Mutation, Action } from 'vuex-class';
 import * as View from '!view!./payment.html?style=./payment.styl';
 
-import { PaymentData, Mutations, Actions } from '../../store/index';
+import { PaymentData, Store } from '../../store/index';
 import { ucwords } from '../../../lib/gj-lib-client/vue/filters/ucwords';
 
-import { Game } from '../../../lib/gj-lib-client/components/game/game.model';
-import { User } from '../../../lib/gj-lib-client/components/user/user.model';
-import { Sellable } from '../../../lib/gj-lib-client/components/sellable/sellable.model';
-import { SellablePricing } from '../../../lib/gj-lib-client/components/sellable/pricing/pricing.model';
 import { AppJolticon } from '../../../lib/gj-lib-client/vue/components/jolticon/jolticon';
 import { AppAddress } from '../address/address';
 import { AppModal } from '../modal/modal';
+import { AppTooltip } from '../../../lib/gj-lib-client/components/tooltip/tooltip';
+import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
+import { AppUserAvatar } from '../../../lib/gj-lib-client/components/user/user-avatar/user-avatar';
 
 @View
-@Component( {
-	name: 'payment',
+@Component({
 	components: {
 		AppJolticon,
 		AppAddress,
+		AppUserAvatar,
 		AppModal,
 	},
+	directives: {
+		AppTooltip,
+	},
+	filters: {
+		currency,
+	},
 })
-export class AppPayment extends Vue
-{
+export class AppPayment extends Vue {
 	ucwords = ucwords;
+	currency = currency;
 
-	@State game: Game;
-	@State developer: User;
-	@State sellable: Sellable;
-	@State pricing: SellablePricing;
+	@State app: Store['app'];
+	@State game: Store['game'];
+	@State developer: Store['developer'];
+	@State sellable: Store['sellable'];
+	@State pricing: Store['pricing'];
 	@State minOrderAmount: number;
 	@State isShowingIncluded: boolean;
-	@State user?: User;
+	@State price: Store['price'];
 
-	@Getter price: string;
+	@Mutation setPayment: Store['setPayment'];
+	@Action checkout: Store['checkout'];
 
 	isShowingAddress = false;
 
@@ -44,31 +51,29 @@ export class AppPayment extends Vue
 		amount: '',
 	};
 
-	mounted()
-	{
-		this.payment.amount = this.price;
+	mounted() {
+		this.payment.amount = (this.price! / 100).toFixed(2);
 	}
 
-	get minAmount()
-	{
-		return this.sellable.type === 'paid'
-			? this.pricing.amount / 100
-			: this.minOrderAmount / 100;
+	get user() {
+		return this.app.user;
 	}
 
-	submit( method: any )
-	{
+	get minAmount() {
+		return this.sellable.type === 'paid' ? this.pricing!.amount / 100 : this.minOrderAmount / 100;
+	}
+
+	submit(method: any) {
 		const paymentData = new PaymentData();
 		paymentData.method = method;
-		paymentData.amount = parseFloat( this.payment.amount );
+		paymentData.amount = parseFloat(this.payment.amount);
 		paymentData.email = this.payment.email;
 
-		this.$store.commit( Mutations.setPayment, paymentData );
+		this.setPayment(paymentData);
 
-		if ( paymentData.method === 'cc-stripe' ) {
-			this.$store.dispatch( Actions.checkout );
-		}
-		else if ( paymentData.method === 'paypal' ) {
+		if (paymentData.method === 'cc-stripe') {
+			this.checkout();
+		} else if (paymentData.method === 'paypal') {
 			this.isShowingAddress = true;
 		}
 	}

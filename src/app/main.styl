@@ -1,7 +1,5 @@
-@import '../node_modules/hint.css/hint.base.css';
-
 @import '~styles/variables'
-@import '../lib/gj-lib-client/stylus/common/index'
+@import '../lib/gj-lib-client/stylus/common'
 
 @import '../lib/gj-lib-client/components/overlay-scrollbar/overlay-scrollbar'
 @import '../lib/gj-lib-client/components/jolticons/jolticons'
@@ -15,8 +13,6 @@ body
 	height: $shell-height
 	padding-top: $pricing-card-offset
 	overflow: hidden
-
-@import './styles/tooltip'
 
 /**
  * Forms
@@ -36,4 +32,4 @@ body
 	border: 0
 
 	.shell.light &
-		border 1px solid $gray-lighter
+		border: 1px solid $gray-lighter
