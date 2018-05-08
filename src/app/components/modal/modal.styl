@@ -1,7 +1,8 @@
 @require '~styles/variables'
-@require '../../../lib/gj-lib-client/stylus/common/mixins'
+@require '~styles-lib/mixins'
 
 .modal
+	rounded-corners()
 	position: absolute
 	top: $shell-padding
 	right: $shell-padding
@@ -10,17 +11,14 @@
 	padding: $grid-gutter-width
 	box-shadow: 0 0 5px $black
 	border: 1px solid $gray
-	border-radius: $border-radius-base
 	z-index: 10
 
-	&.v-enter-active
-	&.v-leave-active
+	&.v-enter-active, &.v-leave-active
 		transition: all 500ms $strong-ease-out
 
-	&.v-enter
-	&.v-leave-to
+	&.v-enter, &.v-leave-to
 		opacity: 0
-		transform: scale( 1.2 )
+		transform: scale(1.2)
 
 	&-close
 		float: right

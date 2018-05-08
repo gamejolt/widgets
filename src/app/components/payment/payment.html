@@ -23,9 +23,9 @@
 			</label>
 
 			<div class="form-group-control">
-				<app-user-avatar :user="user" />
+				<app-user-avatar-img :user="user" />
 				<div class="user-display-name">
-					<a class="link-unstyled" :href="'http://gamejolt.com' + user.url" target="_blank">
+					<a class="link-unstyled" :href="'https://gamejolt.com' + user.url" target="_blank">
 						{{ user.display_name }}
 					</a>
 				</div>
@@ -52,10 +52,7 @@
 				<span class="text-muted" v-if="sellable.type === 'paid'">
 					({{ price | currency}} or more)
 
-					<span
-						class="hint--top-left hint--large"
-						:data-hint="`The developer has set the price of this game to ${currency(price)}, but you are able to support them by giving more.`"
-						>
+					<span v-app-tooltip="`The developer has set the price of this game to ${currency(price)}, but you are able to support them by giving more.`">
 						<app-jolticon icon="help-circle" />
 					</span>
 				</span>
@@ -64,7 +61,7 @@
 
 		<div class="form-errors" v-if="errors.any()">
 
-			<div class="alert alert-warning">
+			<div class="alert alert-notice">
 				<app-jolticon icon="notice" />
 				<template v-if="errors.has( 'email:required' )">
 					Please enter an email address.
@@ -85,22 +82,20 @@
 
 		</div>
 		<div class="payment-methods" v-else>
-			<button
-				class="btn btn-outline"
+			<app-button
+				icon="credit-card"
 				:disabled="errors.any() ? 'disabled' : undefined"
 				@click.prevent="submit( 'cc-stripe' )"
 				>
-				<app-jolticon icon="credit-card" />
 				Credit Card
-			</button>
+			</app-button>
 
-			<button
-				class="btn btn-outline"
+			<app-button
 				:disabled="errors.any() ? 'disabled' : undefined"
 				@click.prevent="submit( 'paypal' )"
 				>
 				PayPal
-			</button>
+			</app-button>
 		</div>
 
 	</form>

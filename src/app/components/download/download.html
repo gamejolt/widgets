@@ -5,7 +5,7 @@
 			<em>Enter a package description if you'd like to fill this area out. <strong>(You're seeing this because you're the developer and your package doesn't have a description.)</strong></em>
 		</template>
 		<template v-else>
-			<app-fade-collapse style="max-height: 70px" @required="isDescriptionCollapsed = true">
+			<app-fade-collapse style="max-height: 60px" @required="isDescriptionCollapsed = true">
 				{{ package.description }}
 			</app-fade-collapse>
 
@@ -19,47 +19,45 @@
 
 	<div class="download-controls">
 
-		<button
-			class="btn btn-outline"
+		<app-button
+			primary
 			v-if="browserBuild"
 			@click="buildClick( browserBuild )"
 			>
-			<app-jolticon icon="play" />
 			Play
 			<app-jolticon class="jolticon-addon" :icon="showcasedBrowserIcon" />
-		</button>
+		</app-button>
 
-		<button
-			class="btn btn-outline"
+		<app-button
 			v-if="downloadableBuild"
+			:primary="!browserBuild"
 			@click="buildClick( downloadableBuild )"
 			>
-			<app-jolticon icon="download" />
 			Download
 			<small v-if="platformSupportInfo[ showcasedOs ].arch === '64'">
 				64-bit
 			</small>
 			<small>({{ downloadableBuild.primary_file.filesize | filesize }})</small>
 			<app-jolticon class="jolticon-addon" :icon="showcasedOsIcon" />
-		</button>
+		</app-button>
 
 		<!--
 			If this package only has "Other" builds, then we make it look like a download
 			button with a [...] after.
 			If the package has normal builds too, then we just show it as a more options sparse button.
 		-->
-		<button class="btn btn-outline"
+		<app-button
 			v-if="extraBuilds.length"
+			icon="ellipsis-v"
+			:primary="otherOnly"
+			:circle="!otherOnly"
 			@click="isShowingMoreOptions = true"
 			>
-			<app-jolticon icon="ellipsis-h" />
 			<span v-if="otherOnly">
-				<app-jolticon icon="download" />
 				Download
 				<app-jolticon class="jolticon-addon" icon="other-os" />
 			</span>
-			<span v-if="!otherOnly">more</span>
-		</button>
+		</app-button>
 
 	</div>
 
@@ -78,17 +76,16 @@
 					<!--
 						If a ROM, we want to show a tooltip on what kind.
 					-->
-					<a
-						class="btn btn-outline btn-block"
-						@click="buildClick( extraBuild.build, true )"
-						:class="{ 'hint--bottom': extraBuild.build.type === GameBuild.TYPE_ROM }"
-						:data-hint="
+					<app-button
+						block
+						:icon="extraBuild.icon"
+						v-app-tooltip="
 							extraBuild.build.type === GameBuild.TYPE_ROM
-							? GameBuild.emulatorInfo[ extraBuild.build.emulator_type ]
-							: undefined
+								? GameBuild.emulatorInfo[ extraBuild.build.emulator_type ]
+								: undefined
 						"
+						@click="buildClick( extraBuild.build, true )"
 						>
-						<app-jolticon :icon="extraBuild.icon" />
 
 						<!--
 							We show the filename if it's an "Other" build.
@@ -113,7 +110,7 @@
 						<small class="text-muted">
 							({{ extraBuild.build.primary_file.filesize | filesize }})
 						</small>
-					</a>
+					</app-button>
 					<br>
 				</div>
 

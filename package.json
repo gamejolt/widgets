@@ -4,29 +4,32 @@
 	"private": true,
 	"scripts": {
 		"dev": "gulp watch",
-		"build": "gulp --production"
+		"build": "gulp --production",
+		"check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"axios": "0.16.2",
-		"bootstrap-stylus": "hworld/bootstrap-stylus#master",
-		"core-js": "2.5.0",
-		"hint.css": "2.4.1",
-		"qs": "6.5.0",
-		"reflect-metadata": "0.1.10",
-		"tslint": "5.6.0",
-		"ua-parser-js": "0.7.14",
+		"axios": "0.17.1",
+		"core-js": "2.5.1",
+		"qs": "6.5.2",
+		"reflect-metadata": "0.1.12",
+		"tslint": "5.8.0",
+		"typescript": "2.6.1",
+		"ua-parser-js": "0.7.18",
 		"vee-validate": "2.0.0-rc.9",
-		"vue": "2.4.2",
-		"vue-class-component": "5.0.2",
-		"vue-gettext": "2.0.22",
-		"vue-property-decorator": "5.2.1",
-		"vue-server-renderer": "2.4.2",
-		"vuex": "2.3.1",
-		"vuex-class": "0.2.0"
+		"vue": "2.5.16",
+		"vue-class-component": "6.2.0",
+		"vue-gettext": "github:gamejolt/vue-gettext#lazy",
+		"vue-property-decorator": "6.0.0",
+		"vue-server-renderer": "2.5.16",
+		"vuex": "3.0.1",
+		"vuex-class": "0.3.0",
+		"rxjs": "5.5.2",
+		"v-tooltip": "2.0.0-rc.23",
+		"vue-template-compiler": "2.5.16"
 	},
 	"devDependencies": {
-		"@types/qs": "6.5.0",
-		"@types/ua-parser-js": "0.7.31",
-		"game-jolt-frontend-lib": "gamejolt/frontend-lib#master"
+		"@types/qs": "6.5.1",
+		"@types/ua-parser-js": "0.7.32",
+		"game-jolt-frontend-lib": "link:src/lib/gj-lib-client"
 	}
 }

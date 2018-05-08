@@ -12,21 +12,18 @@
 		left: 0
 		right: 0
 		height: 25px
-		background-image: linear-gradient( to bottom, rgba( $white, 0 ) 0%, rgba( $white, 1 ) 100% )
 		pointer-events: none
 		z-index: 1
 
-	.fill-dark &
+	// Light theme.
+	.theme-light &
 		&::before
-			background-image: linear-gradient( to bottom, rgba( $gray-dark, 0 ) 0%, rgba( $gray-dark, 1 ) 100% )
+			background-image: linear-gradient(to bottom, var(--theme-bg-offset-trans) 0, var(--theme-bg-offset) 100%)
 
-	.fill-darker &
+	// Dark theme.
+	.theme-dark &
 		&::before
-			background-image: linear-gradient( to bottom, rgba( $gray-darker, 0 ) 0%, rgba( $gray-darker, 1 ) 100% )
-
-	.fill-darkest &
-		&::before
-			background-image: linear-gradient( to bottom, rgba( $gray-darkest, 0 ) 0%, rgba( $gray-darkest, 1 ) 100% )
+			background-image: linear-gradient(to bottom, var(--theme-darker-trans) 0, var(--theme-darker) 100%)
 
 	&.is-collapsed
 		&::before

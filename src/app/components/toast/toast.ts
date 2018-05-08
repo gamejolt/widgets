@@ -1,15 +1,9 @@
-import * as Vue from 'vue';
+import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import * as View from '!view!./toast.html?style=./toast.styl';
-
-import { AppJolticon } from '../../../lib/gj-lib-client/vue/components/jolticon/jolticon';
+import View from '!view!./toast.html?style=./toast.styl';
 
 @View
-@Component({
-	components: {
-		AppJolticon,
-	},
-})
+@Component({})
 export class AppToast extends Vue {
 	@Prop(String) type: string;
 

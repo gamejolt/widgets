@@ -1,15 +1,9 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import * as View from '!view!./modal.html?style=./modal.styl';
-
-import { AppJolticon } from '../../../lib/gj-lib-client/vue/components/jolticon/jolticon';
+import View from '!view!./modal.html?style=./modal.styl';
 
 @View
-@Component({
-	components: {
-		AppJolticon,
-	},
-})
+@Component({})
 export class AppModal extends Vue {
 	@Prop(Boolean) hideClose: boolean;
 

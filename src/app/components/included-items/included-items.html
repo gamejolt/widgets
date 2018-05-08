@@ -16,8 +16,7 @@
 
 					<template v-for="os of [ 'windows', 'mac', 'linux', 'other' ]">
 						<span
-							class="hint--bottom-left"
-							:data-hint="packageCard.platformSupportInfo[ os ].tooltip"
+							v-app-tooltip="packageCard.platformSupportInfo[ os ].tooltip"
 							>
 							<app-jolticon
 								v-if="build[ 'os_' + os ] || build[ 'os_' + os + '_64' ]"

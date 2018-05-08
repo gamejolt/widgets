@@ -1,12 +1,14 @@
 <transition>
 	<div class="modal fill-darker scrollable overlay-scrollbar">
-		<button
+		<app-button
 			v-if="!hideClose"
-			class="modal-close btn btn-danger-outline btn-sm btn-sparse"
+			sm
+			sparse
+			icon="remove"
+			class="modal-close"
 			@click="close"
-			>
-			<app-jolticon icon="remove" />
-		</button>
+			/>
+			
 		<slot />
 	</div>
 </transition>

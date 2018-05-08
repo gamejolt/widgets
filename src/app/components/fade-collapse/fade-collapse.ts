@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import * as View from '!view!./fade-collapse.html?style=./fade-collapse.styl';
+import View from '!view!./fade-collapse.html?style=./fade-collapse.styl';
 
 import { Ruler } from '../../../lib/gj-lib-client/components/ruler/ruler-service';
 

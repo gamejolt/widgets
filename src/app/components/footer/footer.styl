@@ -1,5 +1,5 @@
 @require '~styles/variables'
-@require '../../../lib/gj-lib-client/stylus/common/mixins'
+@require '~styles-lib/mixins'
 
 .footer
 	clearfix()
@@ -8,8 +8,7 @@
 	left: $shell-padding
 	right: $shell-padding
 
-.links
-.bolt
+.links, .bolt
 	position: absolute
 	bottom: 0
 	font-size: $font-size-small
@@ -22,14 +21,11 @@
 	right: 0
 
 	a
+		theme-prop('color', 'fg-muted')
 		display: inline-block
-		color: $gray-light
 
 		&:hover
-			color: $gj-green
-
-			.shell.light &
-				color: $gj-dark-green
+			theme-prop('color', 'link')
 
 			.text
 				opacity: 1
@@ -42,16 +38,13 @@
 		vertical-align: text-bottom
 
 	.text
+		theme-prop('color', 'fg-muted')
 		display: inline-block
 		font-family: $font-family-heading
 		opacity: 0
 		transition: opacity 1s, max-width 1s
 		white-space: nowrap
 		vertical-align: middle
-		color: $white
-
-		.shell.light &
-			color: $gray
 
 	.right
 		overflow: hidden

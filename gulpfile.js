@@ -1,8 +1,12 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
 
-var config = {
+const config = {
 	staticCdn: 'https://s.gjcdn.net/widgets',
-	framework: 'vue',
+	sections: {
+		app: {
+			title: 'Game Jolt',
+		},
+	}
 };
 
-require('./src/lib/gj-lib-client/gulp/tasks/common.js')(config, __dirname);
+require('game-jolt-frontend-lib/gulp/tasks/common')(config, __dirname);

@@ -1,27 +1,29 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { State, Mutation, Action } from 'vuex-class';
-import * as View from '!view!./payment.html?style=./payment.styl';
+import View from '!view!./payment.html?style=./payment.styl';
 
 import { PaymentData, Store } from '../../store/index';
 import { ucwords } from '../../../lib/gj-lib-client/vue/filters/ucwords';
 
-import { AppJolticon } from '../../../lib/gj-lib-client/vue/components/jolticon/jolticon';
 import { AppAddress } from '../address/address';
 import { AppModal } from '../modal/modal';
 import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
-import { AppUserAvatar } from '../../../lib/gj-lib-client/components/user/user-avatar/user-avatar';
+import { AppUserAvatarImg } from '../../../lib/gj-lib-client/components/user/user-avatar/img/img';
+import { AppTooltip } from '../../../lib/gj-lib-client/components/tooltip/tooltip';
 
 @View
 @Component({
 	components: {
-		AppJolticon,
 		AppAddress,
-		AppUserAvatar,
+		AppUserAvatarImg,
 		AppModal,
 	},
 	filters: {
 		currency,
+	},
+	directives: {
+		AppTooltip,
 	},
 })
 export class AppPayment extends Vue {
@@ -56,7 +58,9 @@ export class AppPayment extends Vue {
 	}
 
 	get minAmount() {
-		return this.sellable.type === 'paid' ? this.pricing!.amount / 100 : this.minOrderAmount / 100;
+		return this.sellable.type === 'paid'
+			? this.pricing!.amount / 100
+			: this.minOrderAmount / 100;
 	}
 
 	submit(method: any) {

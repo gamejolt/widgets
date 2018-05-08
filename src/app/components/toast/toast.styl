@@ -1,18 +1,15 @@
 @require '~styles/variables'
+@require '~styles-lib/mixins'
 
 .toast
+	rounded-corners()
 	position: absolute
 	bottom: 0
 	left: $shell-padding * 2
 	right: @left
 	padding: 7px 10px
-	border-radius: $border-radius-base
 	z-index: 1000
 
 	&-close
 		float: right
 		margin-left: 10px
-
-	&-error
-		a:hover
-			color: $black

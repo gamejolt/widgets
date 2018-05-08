@@ -1,8 +1,11 @@
 @require '~styles/variables'
-@require '../lib/gj-lib-client/stylus/common/mixins'
+@require '~styles-lib/mixins'
 
 .shell
+	rounded-corners()
 	padding: $shell-padding
 	position: relative
 	height: $shell-height - $pricing-card-offset
-	border-radius: $border-radius-base
+
+.theme-light
+	theme-prop('background-color', 'bg-offset')

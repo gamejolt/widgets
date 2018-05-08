@@ -1,9 +1,10 @@
 @require '~styles/variables'
+@require '~styles-lib/mixins'
 
 .payment-form
 	margin-bottom: $shell-padding
 
-	>>> .user-avatar
+	>>> .user-avatar-img
 		width: $input-height-base
 		float: left
 
@@ -25,11 +26,11 @@
 				width: 120px
 
 		&-currency
+			theme-prop('color', 'fg-muted')
 			position: absolute
 			content: '$'
 			top: 6px
 			left: 10px
-			color: $gray-light
 			z-index: 2
 
 	.control-label
@@ -44,9 +45,7 @@
 	.form-group
 		clear: left
 
-	.form-group-control
-	.form-errors
-	.payment-methods
+	.form-group-control, .form-errors, .payment-methods
 		margin-left: 100px + $grid-gutter-width
 
 		@media $media-sm-up

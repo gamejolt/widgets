@@ -1,11 +1,7 @@
-@require '../node_modules/hint.css/hint.base.css'
-
 @require '~styles/variables'
 @require '../lib/gj-lib-client/stylus/common'
-
 @require '../lib/gj-lib-client/components/overlay-scrollbar/overlay-scrollbar'
 @require '../lib/gj-lib-client/components/jolticons/jolticons'
-@require '../lib/gj-lib-client/components/button/button'
 @require '../lib/gj-lib-client/components/alert/alert'
 
 html, body
@@ -16,14 +12,11 @@ body
 	padding-top: $pricing-card-offset
 	overflow: hidden
 
-@require './styles/tooltip'
-
 /**
  * Forms
  */
 .form-group
 	margin-bottom: 5px
-
 	// Wasn't allowing tooltips to go over buttons correctly
 	position: relative
 	z-index: 1
@@ -34,6 +27,3 @@ body
 
 .form-control
 	border: 0
-
-	.shell.light &
-		border: 1px solid $gray-lighter

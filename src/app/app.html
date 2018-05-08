@@ -1,22 +1,20 @@
 <div class="shell"
 	:class="{
-		'fill-darker': !isLightTheme,
-		'fill-lightest': isLightTheme,
-		'dark': !isLightTheme,
-		'light': isLightTheme,
+		'theme-dark fill-darker': !isLightTheme,
+		'theme-light': isLightTheme,
 		'is-loaded': isLoaded,
 		'has-invalid-key-error': hasInvalidKey
 	}"
 	>
 
+	<app-theme />
+
 	<div
 		v-if="hasInvalidKey"
-		class="alert alert-warning text-center"
+		class="alert alert-notice text-center"
 		>
-		<p>
-			<app-jolticon icon="notice" />
-			Invalid widget key.
-		</p>
+		<app-jolticon icon="notice" />
+		Invalid widget key.
 	</div>
 
 	<app-processing-overlay v-if="isProcessing" />

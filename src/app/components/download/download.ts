@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { State } from 'vuex-class';
-import * as View from '!view!./download.html?style=./download.styl';
+import View from '!view!./download.html?style=./download.styl';
 
-import { AppJolticon } from '../../../lib/gj-lib-client/vue/components/jolticon/jolticon';
 import { filesize } from '../../../lib/gj-lib-client/vue/filters/filesize';
 import { Store } from '../../store/index';
 import { GameBuild } from '../../../lib/gj-lib-client/components/game/build/build.model';
@@ -15,11 +14,11 @@ import { Sellable } from '../../../lib/gj-lib-client/components/sellable/sellabl
 import { AppFadeCollapse } from '../../components/fade-collapse/fade-collapse';
 import { AppPayment } from '../payment/payment';
 import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
+import { AppTooltip } from '../../../lib/gj-lib-client/components/tooltip/tooltip';
 
 @View
 @Component({
 	components: {
-		AppJolticon,
 		AppModal,
 		AppFadeCollapse,
 		AppPayment,
@@ -27,6 +26,9 @@ import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
 	filters: {
 		filesize,
 		currency,
+	},
+	directives: {
+		AppTooltip,
 	},
 })
 export class AppDownload extends Vue {
@@ -75,7 +77,9 @@ export class AppDownload extends Vue {
 
 	get shouldShowDevDescription() {
 		return (
-			this.app.user && this.game.developer.id === this.app.user.id && !this.package.description
+			this.app.user &&
+			this.game.developer.id === this.app.user.id &&
+			!this.package.description
 		);
 	}
 
@@ -95,14 +99,17 @@ export class AppDownload extends Vue {
 			sourceResourceId: this.game.id,
 		});
 
-		if (build.isBrowserBased() || build.type === GameBuild.TYPE_ROM) {
+		if (build.isBrowserBased || build.type === GameBuild.TYPE_ROM) {
 			// We have to open the window first before getting the URL. The browser
 			// will block the popup unless it's done directly in the onclick
 			// handler. Once we have the download URL we can direct the window that
 			// we now have the reference to.
 			const win = window.open('');
-			const payload = await build.getDownloadUrl();
-			win.location.href = payload.url;
+			if (win) {
+				// For some reason "win" in null in dev.
+				const payload = await build.getDownloadUrl();
+				win.location.href = payload.url;
+			}
 		} else {
 			window.open(Environment.baseUrl + build.getUrl(this.game, 'download'));
 		}

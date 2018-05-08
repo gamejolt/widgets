@@ -1,23 +1,25 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { State } from 'vuex-class';
-import * as View from '!view!./game-header.html?style=./game-header.styl';
+import View from '!view!./game-header.html?style=./game-header.styl';
 
 import { AppPricingCard } from '../pricing-card/pricing-card';
-import { AppJolticon } from '../../../lib/gj-lib-client/vue/components/jolticon/jolticon';
 import { Sellable } from '../../../lib/gj-lib-client/components/sellable/sellable.model';
 import { Environment } from '../../../lib/gj-lib-client/components/environment/environment.service';
 import { AppModal } from '../modal/modal';
 import { AppIncludedItems } from '../included-items/included-items';
 import { Store } from '../../store/index';
+import { AppTooltip } from '../../../lib/gj-lib-client/components/tooltip/tooltip';
 
 @View
 @Component({
 	components: {
-		AppJolticon,
 		AppPricingCard,
 		AppModal,
 		AppIncludedItems,
+	},
+	directives: {
+		AppTooltip,
 	},
 })
 export class AppGameHeader extends Vue {
@@ -31,7 +33,7 @@ export class AppGameHeader extends Vue {
 	created() {}
 
 	get gameUrl() {
-		// `http://gamejolt.com/games/${game.slug}/${game.id}`
+		// `https://gamejolt.com/games/${game.slug}/${game.id}`
 		return Environment.baseUrl + this.game.getUrl();
 	}
 

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { State } from 'vuex-class';
-import * as View from '!view!./pricing-card.html?style=./pricing-card.styl';
+import View from '!view!./pricing-card.html?style=./pricing-card.styl';
 
 import { Store } from '../../store/index';
 import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';

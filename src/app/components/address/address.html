@@ -69,19 +69,20 @@
 		</div>
 
 		<div class="form-errors" v-if="errors.any()">
-			<div class="alert alert-warning">
+			<div class="alert alert-notice">
 				<app-jolticon icon="notice" />
 				{{ errors.all()[0] }}
 			</div>
 		</div>
 		<div v-else>
-			<button
-				class="btn btn-success-outline"
+			<app-button
+				primary
+				solid
 				:disabled="errors.any() ? 'disabled' : undefined"
 				@click.prevent="submit"
 				>
 				Proceed to PayPal
-			</button>
+			</app-button>
 		</div>
 
 	</form>

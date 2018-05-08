@@ -1,18 +1,13 @@
 import Vue from 'vue';
 import { Mutation, Action } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
-import * as View from '!view!./address.html?style=./address.styl';
+import View from '!view!./address.html?style=./address.styl';
 
 import { AddressData, Store } from '../../store/index';
-import { AppJolticon } from '../../../lib/gj-lib-client/vue/components/jolticon/jolticon';
 import { Geo, Region, Country } from '../../../lib/gj-lib-client/components/geo/geo.service';
 
 @View
-@Component({
-	components: {
-		AppJolticon,
-	},
-})
+@Component({})
 export class AppAddress extends Vue {
 	@Mutation setAddress: Store['setAddress'];
 	@Action checkout: Store['checkout'];
