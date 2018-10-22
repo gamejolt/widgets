@@ -13,14 +13,19 @@ import { currency } from '../../../lib/gj-lib-client/vue/filters/currency';
 	},
 })
 export class AppPricingCard extends Vue {
-	@State sellable: Store['sellable'];
-	@State price: Store['price'];
-	@State originalPrice: Store['originalPrice'];
+	@State
+	sellable: Store['sellable'];
+
+	@State
+	price: Store['price'];
+
+	@State
+	originalPrice: Store['originalPrice'];
 
 	get discount() {
 		const price = this.price!;
 		const originalPrice = this.originalPrice!;
 
-		return ((originalPrice - price) / originalPrice).toFixed(0);
+		return (((originalPrice - price) / originalPrice) * 100).toFixed(0);
 	}
 }
